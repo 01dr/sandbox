@@ -5,7 +5,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+// actions
 import {loginUser} from '../../actions/UserActions'
+
+// styles
 
 class SignInForm extends React.Component {
     constructor(props, context) {
@@ -54,6 +57,14 @@ class SignInForm extends React.Component {
     }
 
     render() {
+
+        let error;
+        if (this.state.emailError) {
+            error = 'Wrong e-mail.';
+        } else if (this.state.passwordError) {
+            error = 'Wrong password.';
+        }
+
         return  <div>
                     <form onSubmit={::this.handleSubmit}>
                         <input
@@ -65,6 +76,7 @@ class SignInForm extends React.Component {
                             placeholder="Password"
                             onChange={::this.handlePasswordChange} /><br/>
                         <button type="submit">Login</button>
+                        <div>{error}</div>
                     </form>
                 </div>
     }

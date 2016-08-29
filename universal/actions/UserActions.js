@@ -1,9 +1,7 @@
-/**
- * Created by hex22a on 01.04.16.
- */
 import request from 'superagent';
 
-import { routerActions } from 'react-router-redux';
+//import { routerActions } from 'react-router-redux';
+import { browserHistory } from 'react-router'
 
 import { registerUrl, loginUrl,
     REGISTER_USER, REGISTER_USER_FAIL, REGISTER_USER_SUCCESS,
@@ -22,6 +20,7 @@ export function registerUser(user) {
                     console.log(err);
                     dispatch(registerUserFail(user, res.body));
                 } else {
+                    browserHistory.push('/');
                     dispatch(registerUserSuccess(res.body));
                 }
             });
@@ -54,23 +53,7 @@ export function loginUser(user) {
                     dispatch(loginUserFail(res.body));
                 } else {
                     console.log(res.body.user.role);
-                    switch (res.body.user.role) {
-                    case 'sales':
-                        dispatch(routerActions.push('/dashboard-manager'));
-                        break;
-                    case 'rop':
-                        dispatch(routerActions.push('/dashboard-rop'));
-                        break;
-                    case 'superuser':
-                        dispatch(routerActions.push('/superuser'));
-                        break;
-                    case 'project-manager':
-                        dispatch(routerActions.push('/dashboard-project-manager'));
-                        break;
-                    case 'customer':
-                        dispatch(routerActions.push('/dashboard'));
-                        break;
-                    }
+                    browserHistory.push('/');
                     dispatch(loginUserSuccess(res.body));
                 }
             });

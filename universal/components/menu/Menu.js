@@ -10,8 +10,16 @@ import s from './menu.pcss'
 
 class Menu extends React.Component {
     render() {
+        let menu;
+        // if (locals.user) {
+        //     menu = '<Link to="/">/home</Link> <Link to="/post">/post</Link> <Link to="/logout">/logout</Link>';
+        // } else {
+        //     menu = '<Link to="/">/home</Link> <Link to="/signup">/signup</Link> <Link to="/signin">/signin</Link>'
+        // }
+        console.log();
+
         return  <div className={s.menu}>
-                    <Link to="/">/home</Link> <Link to="/signup">/signup</Link> <Link to="/signin">/signin</Link>
+                    {menu}
                 </div>
     }
 }

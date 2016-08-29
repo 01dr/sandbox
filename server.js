@@ -95,6 +95,7 @@ app.set('views', path.join(__dirname, 'server', 'view'));
 app.set('view engine', 'pug');
 
 app.use('/public', express.static(path.join(__dirname, '/public')));
+app.use('/fonts', express.static(path.join(__dirname, '/fonts')));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({
     extended: true,

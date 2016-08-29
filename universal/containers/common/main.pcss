@@ -1,0 +1,130 @@
+/**
+ * Created by invader on 29.08.16.
+ */
+
+$bg-color: #272822;
+$text-color: #d4d7d5;
+$link-color: #66d9ef;
+
+body {
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.875rem;
+  line-height: 1.3125rem;
+  background-color: $bg-color;
+  color: $text-color
+}
+h1 {
+  font-family: inherit;
+  font-weight: 600;
+  font-style: inherit;
+  font-size: 3.6875rem;
+  line-height: 3.9375rem;
+  margin-top: 1.3125rem;
+  margin-bottom: 0rem;
+}
+h2 {
+  font-family: inherit;
+  font-weight: 600;
+  font-style: inherit;
+  font-size: 2.3125rem;
+  line-height: 2.625rem;
+  margin-top: 1.3125rem;
+  margin-bottom: 1.3125rem;
+}
+h3 {
+  font-family: inherit;
+  font-weight: 600;
+  font-style: inherit;
+  font-size: 1.4375rem;
+  line-height: 2.625rem;
+  margin-top: 1.3125rem;
+  margin-bottom: 0rem;
+}
+h4 {
+  font-family: inherit;
+  font-weight: 600;
+  font-style: inherit;
+  font-size: 0.875rem;
+  line-height: 1.3125rem;
+  margin-top: 1.3125rem;
+  margin-bottom: 0rem;
+}
+h5 {
+  font-family: inherit;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 0.875rem;
+  line-height: 1.3125rem;
+  margin-top: 1.3125rem;
+  margin-bottom: 0rem;
+}
+p, ul, ol, pre, table, blockquote {
+  margin-top: 0rem;
+  margin-bottom: 1.3125rem;
+}
+ul ul, ol ol, ul ol, ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+hr {
+  border: 1px solid;
+  margin: -1px 0;
+}
+b, strong, em, small, code {
+  line-height: 1;
+}
+sup {
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+
+a {
+  color: $link-color;
+}
+
+input {
+  font-size: .9rem;
+  min-width: 300px;
+  color: #333;
+  padding: .5rem;
+  border: 0 transparent;
+  outline: none;
+  background-color: rgba(255, 255, 255, .8);
+  margin: 10px 0 !important;
+  transition: .1s ease all;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, .9);
+  }
+
+  &:focus {
+    background-color: rgba(255, 255, 255, 1);
+  }
+}
+
+button {
+  font-size: .9rem;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+  padding: .2rem 1rem;
+  background-color: rgba(255, 255, 255, .8);
+  border: 0 transparent;
+  margin: 10px 0 !important;
+  transition: .1s ease all;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, .9);
+  }
+
+  &:focus {
+    background-color: rgba(255, 255, 255, 1);
+  }
+}

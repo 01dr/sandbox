@@ -63,6 +63,7 @@
     "http": "0.0.0",
     "image-webpack-loader": "^2.0.0",
     "immutable": "^3.7.6",
+    "material-ui": "^0.15.4",
     "mocha": "^3.0.2",
     "mocha-loader": "^0.7.1",
     "moment": "^2.13.0",
@@ -104,7 +105,5 @@
     "webpack-dev-server": "^1.14.1",
     "xss": "^0.2.10"
   },
-  "dependencies": {
-    "stardust": "^0.37.1"
-  }
+  "dependencies": {}
 }

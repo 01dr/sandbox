@@ -42,22 +42,19 @@ class SignUpForm extends React.Component {
     render() {
         return  <div>
                     <form onSubmit={::this.handleSubmit}>
-                        <fieldset>
-                            <legend>Sign up</legend>
-                            <input
-                                type="text"
-                                placeholder="Username"
-                                onChange={::this.handleNameChange} /><br/>
-                            <input
-                                type="email"
-                                placeholder="E-mail"
-                                onChange={::this.handleEmailChange} /><br/>
-                            <input
-                                type="password"
-                                placeholder="Password"
-                                onChange={::this.handlePasswordChange} /><br/>
-                            <button type="submit">Register</button>
-                        </fieldset>
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            onChange={::this.handleNameChange} /><br/>
+                        <input
+                            type="email"
+                            placeholder="E-mail"
+                            onChange={::this.handleEmailChange} /><br/>
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            onChange={::this.handlePasswordChange} /><br/>
+                        <button type="submit">Register</button>
                     </form>
                 </div>
     }

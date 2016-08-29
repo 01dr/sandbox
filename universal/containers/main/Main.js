@@ -1,13 +1,16 @@
-/**
- * Created by x22a on 25.02.16.
- */
-
 import React from 'react';
 import { connect } from 'react-redux'
 
+// actions
 import { listPhotos } from '../../actions/ListPhotosActions'
 
+// styles
 import s from './main.pcss';
+import '../common/main.pcss'
+
+// components
+import Menu from '../../components/menu/Menu'
+import Container from '../../components/container/Container'
 
 class Main extends React.Component {
     componentDidMount() {
@@ -15,14 +18,15 @@ class Main extends React.Component {
     }
 
     render() {
-        return  <div className={s.photos}>
-                    {this.props.photos.map((photo, i) => {
-                        return (<div key={i}>
-                            <h2>{photo.title}</h2>
-                            <img src={photo.path} />
-                        </div>);
-                    })}
-                </div>;
+        return  (
+            <div>
+                <Container>
+                    <Menu/>
+                    <h1>Home</h1>
+                    <p>я ебал Вас в рiт.</p>
+                </Container>
+            </div>
+        )
     }
 }
 

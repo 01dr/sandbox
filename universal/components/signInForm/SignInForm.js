@@ -56,18 +56,15 @@ class SignInForm extends React.Component {
     render() {
         return  <div>
                     <form onSubmit={::this.handleSubmit}>
-                        <fieldset>
-                            <legend>Sign in</legend>
-                            <input
-                                type="email"
-                                placeholder="Username"
-                                onChange={::this.handleEmailChange} /><br/>
-                            <input
-                                type="password"
-                                placeholder="Password"
-                                onChange={::this.handlePasswordChange} /><br/>
-                            <button type="submit">Login</button>
-                        </fieldset>
+                        <input
+                            type="email"
+                            placeholder="Username"
+                            onChange={::this.handleEmailChange} /><br/>
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            onChange={::this.handlePasswordChange} /><br/>
+                        <button type="submit">Login</button>
                     </form>
                 </div>
     }

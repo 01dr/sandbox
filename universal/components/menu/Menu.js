@@ -19,7 +19,7 @@ class Menu extends React.Component {
         console.log();
 
         return  <div className={s.menu}>
-                    {menu}
+                    <Link to="/">/home</Link> <Link to="/test">/test</Link> <Link to="/signup">/signup</Link> <Link to="/signin">/signin</Link> <Link to="/logout">/logout</Link>
                 </div>
     }
 }

@@ -1,94 +1,115 @@
-/**
- * Created by hex22a on 31.03.16.
- */
-
 import passport from 'passport'
 import bcrypt from 'bcrypt'
+import validator from 'validator'
 
 import * as db from './service/db';
 
-const Chance = require('chance');
-const chance = new Chance();
+export function signUp(req, res, next) {
+    let validationResult = validateSignUpForm(req.body);
+    if (!validationResult.success) {
+        return res
+            .status(400)
+            .json({
+                success: false,
+                message: validationResult.message,
+                errors: validationResult.errors
+            })
+    }
 
-function validateEmail(email) {
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}
-
-export function logIn(req, res, next) {
-    passport.authenticate('json', (err, user, info) => { //
+    return passport.authenticate('local-signup', (err) => {
         if (err) {
-            res.status(400);
-            res.json({ error: err });
-        } else {
-            if (user) {
-                req.logIn(user, (err) => {
-                    if (err) {
-                        res.status(400);
-                        res.json({ error: err });
-                    } else {
-                        const token = chance.string({ length: 64 });
-                        db.saveToken({ token }, req.user.id, (err) => {
-                            if (err) { return done(err); }
-                            res.cookie('remember_me', token, { path: '/', httpOnly: true, maxAge: 604800000 }); // 7 days
-                            res.json({ user });
-                            return next();
-                        });
-                    }
-                    return err;
-                });
-            } else {
-                res.status(400);
-                res.json({ error: 'No user' });
-            }
-            return err;
+            return res
+                .status(400)
+                .json({error: err});
         }
+
+        return res.status(200).json({
+            success: true,
+            message: 'You have successfully signed up! Now you should be able to log in.'
+        });
     })(req, res, next);
 }
 
-export function register(req, res, next) {
-    if (!validateEmail(req.body.user.username)) {
-        // Probably not a good email address.
-        res.status(400);
-        res.json({ error: 'Not a valid email address!' });
-        return;
+export function signIn(req, res, next) {
+    let validationResult = validateSignInForm(req.body);
+    if (!validationResult.success) {
+        return res
+            .status(400)
+            .json({
+                success: false,
+                message: validationResult.message,
+                errors: validationResult.errors
+            })
     }
 
-    db.findUserByEmail(req.body.user.username,
-        (err, row) => {
-            if (err) {
-                res.status(400);
-                res.json({ error: 'Oops' });
-                return;
-            }
+    return passport.authenticate('local-signin', (err, token, userData) => {
+        if (err) {
+            res.status(400);
+            res.json({error: err});
+        }
 
-            if (row) {
-                res.status(400);
-                res.json({ error: 'Email is already in Database' });
-            } else {
-                // salt hash password
-                const user = req.body.user;
-
-                user.password = bcrypt.hashSync(user.password, 8);
-
-                // Saving the new user to DB
-                db.saveUser(user,
-                    (err, saved) => {
-                        console.log(`[DEBUG][saveUser] ${saved}`);
-                        if ((err) || (!saved)) {
-                            res.status(400);
-                            res.json({ error: 'Some error' });
-                        } else {
-                            res.json({ user });
-                        }
-                    }
-                );
-            }
+        return res.json({
+            success: true,
+            message: 'You have successfully logged in!',
+            token,
+            user: userData
         });
+    })(req, res, next);
 }
 
-export function logOut(req, res) {
-    res.clearCookie('remember_me');
-    req.logout();
-    res.redirect('/');
+function validateSignUpForm(payload) {
+    let isFormValid = true;
+    let errors = {};
+    let message = '';
+
+    if (!payload.email || !validator.isEmail(payload.email)) {
+        isFormValid = false;
+        errors.email = "Please provide a correct email address.";
+    }
+
+    if (!payload.password || !validator.isLength(payload.password, 8)) {
+        isFormValid = false;
+        errors.password = "Password must have at least 8 characters.";
+    }
+
+    if (!payload.name || payload.name.trim().length === 0) {
+        isFormValid = false;
+        errors.name = "Please provide your name.";
+    }
+
+    if (!isFormValid) {
+        message = "Check the form for errors.";
+    }
+
+    return {
+        success: isFormValid,
+        message: message,
+        errors: errors
+    };
+}
+
+function validateSignInForm(payload) {
+    let isFormValid = true;
+    let errors = {};
+    let message = '';
+
+    if (!payload.email || payload.email.trim().length === 0) {
+        isFormValid = false;
+        errors.email = "Please provide your email address.";
+    }
+
+    if (!payload.password || payload.password.trim().length === 0) {
+        isFormValid = false;
+        errors.password = "Please provide your password.";
+    }
+
+    if (!isFormValid) {
+        message = "Check the form for errors.";
+    }
+
+    return {
+        success: isFormValid,
+        message: message,
+        errors: errors
+    };
 }

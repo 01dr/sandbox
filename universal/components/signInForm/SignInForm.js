@@ -50,7 +50,7 @@ class SignInForm extends React.Component {
 
         if (!errors) {
             this.props.dispatch(loginUser({
-                username: this.state.email,
+                email: this.state.email,
                 password: this.state.password
             }));
         }
